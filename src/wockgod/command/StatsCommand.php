@@ -15,6 +15,10 @@ class StatsCommand extends Command {
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$sender instanceof Player) {
+            $sender->sendMessage("§cThis command can only be used in-game.");
+            return;
+        }
         if (count($args) < 1) {
             $sender->sendMessage("§cUsage: /stats <player>");
             return;
@@ -38,12 +42,12 @@ class StatsCommand extends Command {
                     return;
                 }
 
-                $message = KDR::getInstance()->getConfig()->getNested("messages.stats", "{player}'s Statistics: KDR: {kdr} (Kills: {kills}, Deaths: {deaths}).");
+               /* $message = KDR::getInstance()->getConfig()->getNested("messages.stats", "{player}'s Statistics: KDR: {kdr} (Kills: {kills}, Deaths: {deaths}).");
                 $message = str_replace("{player}", $playerName, $message);
                 $message = str_replace("{kdr}", $kdr, $message);
                 $message = str_replace("{kills}", $kills, $message);
                 $message = str_replace("{deaths}", $deaths, $message);
-                $player->sendMessage($message);
+                $player->sendMessage($message);*/
             });
 
             $form->setTitle(KDR::getInstance()->getConfig()->getNested("ui.stats.title", "Stats"));
